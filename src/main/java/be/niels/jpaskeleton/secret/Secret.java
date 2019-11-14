@@ -1,5 +1,7 @@
 package be.niels.jpaskeleton.secret;
 
+import be.niels.jpaskeleton.shared.Identifiable;
+import be.niels.jpaskeleton.shared.UniqueId;
 import be.niels.jpaskeleton.user.User;
 
 import javax.persistence.*;
@@ -7,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "SECRET")
-public class Secret {
+public class Secret implements Identifiable<Secret.SecretId> {
 
     @Id
     @SequenceGenerator(name = "secret_seq_gen", sequenceName = "secret_seq", allocationSize = 1)
@@ -29,8 +31,9 @@ public class Secret {
         this.owner = owner;
     }
 
-    public long getId() {
-        return id;
+    @Override
+    public SecretId getId() {
+        return new SecretId(id);
     }
 
     public String getContent() {
@@ -57,5 +60,11 @@ public class Secret {
     @Override
     public String toString() {
         return id + ": " + content + ". Owned by: " + owner;
+    }
+
+    public final static class SecretId extends UniqueId {
+        public SecretId(Long id) {
+            super(id);
+        }
     }
 }
