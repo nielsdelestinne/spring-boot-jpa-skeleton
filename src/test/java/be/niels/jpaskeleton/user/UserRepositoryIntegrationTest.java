@@ -10,6 +10,17 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * This test class uses the @DataJpaTest annotation:
+ * Closely inspect the full output when running this test. You will notice the following:
+ * + Spring will find the Spring Data Repositories
+ *      "Finished Spring Data repository scanning in 92ms. Found 2 repository interfaces."
+ * + Spring will replace the DataSource with an embedded (H2) variant, which it will also start (it's added as a dependency)
+ * + Hibernate, activated by Spring, will drop existing tables / sequences and create new tables and sequences based
+ *      on the JPA annotations (e.g. For User and Secret). Thus, JPA is used to generate the Database Schema.
+ * + For each test method, a (test) transaction will be created, after each test method the transaction will end with a rollback
+ * + At the end, the embedded H2 database is shutdown.
+ */
 @DataJpaTest
 class UserRepositoryIntegrationTest {
 
