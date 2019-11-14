@@ -15,7 +15,7 @@ public class Secret implements Identifiable<Secret.SecretId> {
     @SequenceGenerator(name = "secret_seq_gen", sequenceName = "secret_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secret_seq_gen")
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "CONTENT")
     private String content;
@@ -49,7 +49,7 @@ public class Secret implements Identifiable<Secret.SecretId> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Secret secret = (Secret) o;
-        return id == secret.id;
+        return Objects.equals(id, secret.id);
     }
 
     @Override
