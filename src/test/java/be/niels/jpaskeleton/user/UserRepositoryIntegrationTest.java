@@ -31,7 +31,7 @@ class UserRepositoryIntegrationTest {
     }
 
     @Test
-    void save_givenUsersInTheDatabase_thenAllUsersAreReturned() {
+    void findAll_givenUsersInTheDatabase_thenAllUsersAreReturned() {
         User dirk = userRepository.save(new User("Dirk"));
         User stefania = userRepository.save(new User("Stefania"));
 
