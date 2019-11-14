@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,6 +41,17 @@ class UserRepositoryIntegrationTest {
         assertThat(allUsers).containsExactlyInAnyOrder(dirk, stefania);
     }
 
+    @Test
+    void findById_givenAnExistingUserForId_thenReturnThatUser() {
+        User dirk = userRepository.save(new User("Dirk"));
+        userRepository.save(new User("Stefania"));
+
+        Optional<User> actualDirk = userRepository.findById(dirk.getId().value());
+
+        assertThat(actualDirk)
+                .isPresent()
+                .get().isEqualTo(dirk);
+    }
 
 
 }
