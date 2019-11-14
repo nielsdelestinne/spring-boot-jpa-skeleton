@@ -1,8 +1,9 @@
 package be.niels.jpaskeleton.shared;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class UniqueId {
+public abstract class UniqueId implements Serializable {
 
     private final Long id;
 
