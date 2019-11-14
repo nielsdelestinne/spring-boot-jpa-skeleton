@@ -27,4 +27,9 @@ public abstract class UniqueId implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "UniqueId{" + id + "}";
+    }
 }
