@@ -1,17 +1,20 @@
 package be.niels.jpaskeleton.user;
 
+import be.niels.jpaskeleton.shared.Identifiable;
+import be.niels.jpaskeleton.shared.UniqueId;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Identifiable<User.UserId> {
 
     @Id
     @SequenceGenerator(name = "user_seq_gen", sequenceName = "user_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "USERNAME")
     private String username;
@@ -22,8 +25,9 @@ public class User {
         this.username = username;
     }
 
-    public long getId() {
-        return id;
+    @Override
+    public UserId getId() {
+        return new UserId(id);
     }
 
     public String getUsername() {
@@ -35,7 +39,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id;
+        return Objects.equals(id, user.id);
     }
 
     @Override
@@ -47,4 +51,11 @@ public class User {
     public String toString() {
         return id + ": " + username;
     }
+
+    public final static class UserId extends UniqueId {
+        public UserId(Long id) {
+            super(id);
+        }
+    }
+
 }
