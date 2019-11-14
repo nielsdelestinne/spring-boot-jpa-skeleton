@@ -40,7 +40,7 @@ class UserRepositoryV2IntegrationTest {
         User savedUser = userRepository.save(newUser);
 
         assertThat(savedUser).isNotNull();
-        assertThat(savedUser.getId()).isEqualTo(new User.UserId(1L));
+        assertThat(savedUser.getId()).isNotNull();
         assertThat(savedUser.getUsername()).isEqualTo("jimmy.jamma");
     }
 

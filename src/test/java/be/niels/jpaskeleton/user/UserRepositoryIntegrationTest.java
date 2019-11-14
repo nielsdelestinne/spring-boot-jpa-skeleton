@@ -1,6 +1,5 @@
 package be.niels.jpaskeleton.user;
 
-import be.niels.jpaskeleton.user.User.UserId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -38,7 +37,7 @@ class UserRepositoryIntegrationTest {
         User savedUser = userRepository.save(newUser);
 
         assertThat(savedUser).isNotNull();
-        assertThat(savedUser.getId()).isEqualTo(new UserId(1L));
+        assertThat(savedUser.getId()).isNotNull();
         assertThat(savedUser.getUsername()).isEqualTo("jimmy.jamma");
     }
 
